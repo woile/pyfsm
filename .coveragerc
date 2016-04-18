@@ -1,0 +1,14 @@
+[paths]
+source =
+   src/fsm
+   */site-packages/fsm
+
+[run]
+branch = True
+source = fsm
+parallel = true
+
+[report]
+show_missing = true
+precision = 2
+omit = *migrations*
