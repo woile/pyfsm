@@ -79,6 +79,8 @@ class FiniteStateMachineMixin:
 
         :param next_state: where the state must go
         :type next_state: str or int
+        :returns: new state.
+        :rtype: str or int
         :raises InvalidTransition: If transitioning is not possible
         """
         previous_state = self.current_state()
@@ -99,7 +101,7 @@ class FiniteStateMachineMixin:
                 callback(**kwargs)
 
             self.on_change_state(previous_state, next_state, **kwargs)
-
+            return next_state
         else:
             msg = "The transition from {0} to {1} is not valid".format(previous_state,
                                                                        next_state)
