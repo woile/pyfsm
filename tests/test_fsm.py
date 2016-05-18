@@ -49,7 +49,7 @@ class TestStateMachine(unittest.TestCase):
         state = self.program_execution.change_state('pending')
         assert state == 'pending'
 
-    def current_state_not_set(self):
+    def test_current_state_not_set(self):
         """Test current_state exception when not implemented."""
         foo = FooBar()
         self.assertRaises(NotImplementedError, foo.current_state)
