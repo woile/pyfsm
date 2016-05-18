@@ -2,6 +2,10 @@ import unittest
 import fsm
 
 
+class FooBar(fsm.FiniteStateMachineMixin):
+    state_machine = {}
+
+
 class ProgramExecution(fsm.FiniteStateMachineMixin):
     """An example to test the state machine.
 
@@ -25,6 +29,12 @@ class ProgramExecution(fsm.FiniteStateMachineMixin):
         """Overriden."""
         return self.state
 
+    def on_before_pending_callback(self):
+        return
+
+    def on_pending_callback(self):
+        return
+
 
 class TestStateMachine(unittest.TestCase):
 
@@ -38,6 +48,11 @@ class TestStateMachine(unittest.TestCase):
         """
         state = self.program_execution.change_state('pending')
         assert state == 'pending'
+
+    def current_state_not_set(self):
+        """Test current_state exception when not implemented."""
+        foo = FooBar()
+        self.assertRaises(NotImplementedError, foo.current_state)
 
     def test_successful_specific_transition(self):
         """Test a succesful state transition."""
