@@ -2,7 +2,7 @@
 
 # C extensions
 *.so
-
+.pypirc
 # Packages
 *.egg
 *.egg-info
