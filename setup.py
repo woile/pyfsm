@@ -24,7 +24,7 @@ def read(*names, **kwargs):
 
 setup(
     name='python-fsm',
-    version='0.1.0',
+    version='0.1.2',
     license='BSD',
     description='Minimal state machine',
     long_description='%s\n%s' % (
