@@ -36,6 +36,7 @@ setup(
     url='https://github.com/Woile/pyfsm',
     packages=find_packages('src'),
     package_dir={'': 'src'},
+    download_url = 'https://github.com/Woile/pyfsm/tree/0.1.0',
     py_modules=[splitext(basename(path))[0] for path in glob('src/*.py')],
     include_package_data=True,
     zip_safe=False,
@@ -61,9 +62,7 @@ setup(
         # 'Programming Language :: Python :: Implementation :: Stackless',
         'Topic :: Utilities',
     ],
-    keywords=[
-        'finite', 'state', 'machine', 'minimal',
-    ],
+    keywords='finite state machine minimal',
     install_requires=[
         # eg: 'aspectlib==1.1.1', 'six>=1.7',
     ],
