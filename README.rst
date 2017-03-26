@@ -59,7 +59,7 @@ Installation
 
 ::
 
-    pip install python-fsm
+    pip install fsmpy
 
 Documentation
 =============

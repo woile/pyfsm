@@ -23,7 +23,7 @@ def read(*names, **kwargs):
 
 
 setup(
-    name='python-fsm',
+    name='fsmpy',
     version='0.1.2',
     license='BSD',
     description='Minimal state machine',
