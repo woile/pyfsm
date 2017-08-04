@@ -1,6 +1,5 @@
 from .exceptions import InvalidTransition
 
-
 __all__ = ['FiniteStateMachineMixin']
 
 
