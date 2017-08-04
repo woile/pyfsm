@@ -85,24 +85,24 @@ class FiniteStateMachineMixin:
         """
         previous_state = self.current_state()
 
-        if self.can_change(next_state):
-            name = 'on_before_{0}_callback'.format(next_state)
-            callback = getattr(self, name, None)
-            if callback:
-                callback(**kwargs)
-
-            self.on_before_change_state(previous_state, next_state, **kwargs)
-
-            self.state = next_state
-
-            name = 'on_{0}_callback'.format(next_state)
-            callback = getattr(self, name, None)
-            if callback:
-                callback(**kwargs)
-
-            self.on_change_state(previous_state, next_state, **kwargs)
-            return next_state
-        else:
+        if not self.can_change(next_state):
             msg = "The transition from {0} to {1} is not valid".format(previous_state,
                                                                        next_state)
             raise InvalidTransition(msg)
+
+        name = 'on_before_{0}_callback'.format(next_state)
+        callback = getattr(self, name, None)
+        if callback:
+            callback(**kwargs)
+
+        self.on_before_change_state(previous_state, next_state, **kwargs)
+
+        self.state = next_state
+
+        name = 'on_{0}_callback'.format(next_state)
+        callback = getattr(self, name, None)
+        if callback:
+            callback(**kwargs)
+
+        self.on_change_state(previous_state, next_state, **kwargs)
+        return next_state

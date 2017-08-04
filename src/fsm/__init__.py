@@ -1,6 +1,6 @@
 """Initializing package."""
 
-from .exceptions import InvalidTransition
-from .fsm import FiniteStateMachineMixin
+from .fsm import FiniteStateMachineMixin  # NOQA
+from .exceptions import InvalidTransition  # NOQA
 
-__version__ = "0.1.0"
+__version__ = "0.1.2"
