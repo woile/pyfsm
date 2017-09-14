@@ -10,11 +10,13 @@ class FiniteStateMachineMixin:
 
     The states and transitions should be specified in the following way:
 
-    state_machine = {
-       'some_state': '__all__'
-       'another_state': ('some_state', 'one_more_state')
-       'one_more_state': None
-    }
+    .. code-block:: python
+
+        state_machine = {
+           'some_state': '__all__'
+           'another_state': ('some_state', 'one_more_state')
+           'one_more_state': None
+        }
     """
 
     state_machine = None
