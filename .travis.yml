@@ -8,7 +8,7 @@ env:
   matrix:
     - TOXENV=check
     - TOXENV=docs
-
+    - TOXENV=py27,codecov
     - TOXENV=py35,codecov
 before_install:
   - python --version
