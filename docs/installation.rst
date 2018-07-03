@@ -4,4 +4,4 @@ Installation
 
 At the command line::
 
-    pip install python-fsm
+    pip install fsmpy

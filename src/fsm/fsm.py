@@ -91,7 +91,7 @@ class FiniteStateMachineMixin:
                                                                        next_state)
             raise InvalidTransition(msg)
 
-        name = 'on_before_{0}_callback'.format(next_state)
+        name = 'pre_{0}'.format(next_state)
         callback = getattr(self, name, None)
         if callback:
             callback(**kwargs)
@@ -100,7 +100,7 @@ class FiniteStateMachineMixin:
 
         self.state = next_state
 
-        name = 'on_{0}_callback'.format(next_state)
+        name = 'post_{0}'.format(next_state)
         callback = getattr(self, name, None)
         if callback:
             callback(**kwargs)

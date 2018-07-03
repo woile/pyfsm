@@ -26,6 +26,7 @@ Then add the Mixin to any class where the state machine is required.
           """Overriden."""
           return self.state
 
+
 Instanciate the class and use it:
 
 .. code::

@@ -54,6 +54,78 @@ Minimal state machine
 
 * Free software: BSD license
 
+Usage
+=====
+
+.. code-block:: python
+
+    import fsm
+
+    class MyModel(fsm.FiniteStateMachineMixin):
+        """An example to test the state machine.
+
+        Contains transitions to everywhere, nowhere and specific states.
+        """
+
+        state_machine = {
+            'created': '__all__',
+            'pending': ('running',),
+            'running': ('success', 'failed'),
+            'success': None,
+            'failed': ('retry',),
+            'retry': ('pending', 'retry'),
+        }
+
+        def __init__(self, state):
+            """Initialize setting a state."""
+            self.state = state
+
+        def current_state(self):
+            """Overriden."""
+            return self.state
+
+        def on_before_pending(self):
+            print("I'm going to a pending state")
+
+::
+
+    In [4]: m = MyModel(state='created')
+
+    In [5]: m.change_state('pending')
+    I'm going to a pending state
+    Out[5]: 'pending'
+
+    In [6]: m.change_state('failed')
+    ---------------------------------------------------------------------------
+    InvalidTransition                         Traceback (most recent call last)
+    <ipython-input-6-71d2461eee74> in <module>()
+    ----> 1 m.change_state('failed')
+
+    ~/pyfsm/src/fsm/fsm.py in change_state(self, next_state, **kwargs)
+        90             msg = "The transition from {0} to {1} is not valid".format(previous_state,
+        91                                                                        next_state)
+    ---> 92             raise InvalidTransition(msg)
+        93
+        94         name = 'pre_{0}'.format(next_state)
+
+    InvalidTransition: The transition from pending to failed is not valid
+
+
+There are hooks that can be included before a state transition happens and after.
+
+fsm will look for these functions
+
+::
+    pre_<state_name>
+    post_<state_name>
+
+And will give them any extra argument given to :code:`change_state`
+
+E.g:
+
+Running :code:`m.change_state('pending', name='john')` will trigger :code:`pre_pending(name='john')`
+
+
 Installation
 ============
 

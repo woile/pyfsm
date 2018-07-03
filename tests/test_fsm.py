@@ -30,10 +30,10 @@ class ProgramExecution(fsm.FiniteStateMachineMixin):
         """Overriden."""
         return self.state
 
-    def on_before_pending_callback(self):
+    def pre_pending(self):
         return
 
-    def on_pending_callback(self):
+    def post_pending(self):
         return
 
 
