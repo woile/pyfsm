@@ -116,6 +116,7 @@ There are hooks that can be included before a state transition happens and after
 fsm will look for these functions
 
 ::
+
     pre_<state_name>
     post_<state_name>
 
