@@ -168,6 +168,26 @@ Django integration
         def on_change_state(self, previous_state, next_state, **kwargs):
             self.save()
 
+Django Rest Framework
+---------------------
+
+If you are using :code:`serializers`, they usually perform the :code:`save`, so saving inside :code:`on_change_state` is not necessary.
+
+One simple solution is to do this:
+
+.. code-block:: python
+
+    class MySerializer(serializers.ModelSerializer):
+
+        def update(self, instance, validated_data):
+            instance = super().update(instance, validated_data)
+            new_state = validated_data.get('state', instance.state)
+            try:
+                instance.change_state(new_state)
+            except fsm.InvalidTransition:
+                raise serializers.ValidationError("Invalid transition")
+            return instance
+
 
 Documentation
 =============
