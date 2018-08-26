@@ -19,7 +19,7 @@ def read(*names, **kwargs):
 
 setup(
     name="fsmpy",
-    version="1.0.1",
+    version="2.0.0",
     license="BSD",
     description="Minimal state machine",
     long_description="%s\n%s"
@@ -32,7 +32,7 @@ setup(
     author="Santiago Fraire Willemoes",
     author_email="santiwilly@gmail.com",
     url="https://github.com/Woile/pyfsm",
-    download_url="https://github.com/Woile/pyfsm/tree/1.0.1",
+    download_url="https://github.com/Woile/pyfsm/tree/2.0.0",
     include_package_data=True,
     classifiers=[
         # complete classifier list: http://pypi.python.org/pypi?%3Aaction=list_classifiers

@@ -2,11 +2,12 @@
 Changelog
 =========
 
-Unreleased
------------
+2.0.0 (2018-08-26)
+-----------------------------------------
 
 * BREAKING: Simpler implementation
-* Docs and readme updated
+* Docs and README updated
+* Usage of pyproject.toml
 
 1.0.0 (2018-07-03)
 -----------------------------------------

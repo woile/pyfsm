@@ -13,7 +13,7 @@ Overview
       - | |travis|
         | |codecov|
     * - package
-      - |version| |downloads| |wheel| |supported-versions| |supported-implementations|
+      - |version| |wheel| |supported-versions| |supported-implementations|
 
 .. |docs| image:: https://readthedocs.org/projects/pyfsm/badge/?style=flat
     :target: https://readthedocs.org/projects/pyfsm
@@ -29,10 +29,6 @@ Overview
 
 .. |version| image:: https://img.shields.io/pypi/v/fsmpy.svg?style=flat
     :alt: PyPI Package latest release
-    :target: https://pypi.python.org/pypi/fsmpy
-
-.. |downloads| image:: https://img.shields.io/pypi/dm/fsmpy.svg?style=flat
-    :alt: PyPI Package monthly downloads
     :target: https://pypi.python.org/pypi/fsmpy
 
 .. |wheel| image:: https://img.shields.io/pypi/wheel/fsmpy.svg?style=flat

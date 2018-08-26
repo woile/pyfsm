@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "fsmpy"
-version = "1.0.1"
+version = "2.0.0"
 description = "Minimal state machine"
 authors = ["Santiago Fraire Willemoes <santiwilly@gmail.com>"]
 license = "MIT"
@@ -9,6 +9,9 @@ keywords=["finite", "state", "machine", "minimal"]
 classifiers=[
     'Development Status :: 5 - Production/Stable',
     'Intended Audience :: Developers',
+]
+packages = [
+    { include = "fsm" }
 ]
 homepage = "https://github.com/Woile/pyfsm"
 repository = "https://github.com/Woile/pyfsm"
