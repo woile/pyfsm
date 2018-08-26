@@ -1,6 +1,7 @@
-__all__ = ['InvalidTransition']
+__all__ = ["InvalidTransition"]
 
 
 class InvalidTransition(Exception):
     """Moving from an state to another is not possible."""
+
     pass

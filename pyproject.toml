@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "fsmpy"
+version = "1.0.1"
+description = "Minimal state machine"
+authors = ["Santiago Fraire Willemoes <santiwilly@gmail.com>"]
+license = "MIT"
+readme = "README.rst"
+keywords=["finite", "state", "machine", "minimal"]
+classifiers=[
+    'Development Status :: 5 - Production/Stable',
+    'Intended Audience :: Developers',
+]
+homepage = "https://github.com/Woile/pyfsm"
+repository = "https://github.com/Woile/pyfsm"
+documentation = "https://pyfsm.readthedocs.io/en/latest/"
+
+[tool.poetry.dependencies]
+python = "*"
+
+[tool.poetry.dev-dependencies]
+tox = "^3.2"
+bumpversion = "^0.5.3"
+flake8 = "^3.5"

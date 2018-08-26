@@ -17,6 +17,11 @@ fsm module
     :undoc-members:
     :show-inheritance:
 
+.. autoclass:: fsm.BaseFiniteStateMachineMixin
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 
 Module contents
 ---------------

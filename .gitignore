@@ -1,5 +1,7 @@
 *.py[cod]
 
+.vscode/
+pyproject.lock
 # C extensions
 *.so
 .pypirc

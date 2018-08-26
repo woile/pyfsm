@@ -2,6 +2,12 @@
 Changelog
 =========
 
+Unreleased
+-----------
+
+* BREAKING: Simpler implementation
+* Docs and readme updated
+
 1.0.0 (2018-07-03)
 -----------------------------------------
 

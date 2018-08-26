@@ -22,12 +22,9 @@ Then add the Mixin to any class where the state machine is required.
 
       state = 'my_first_state'
 
-      def current_state(self):
-          """Overriden."""
-          return self.state
 
-
-Instanciate the class and use it:
+Instanciate the class and use it. Remember that in order to work as intended, :code:`change_state`
+must be used to transition from one state to the other.
 
 .. code::
 
@@ -47,3 +44,9 @@ Instanciate the class and use it:
 
   >>> foo.get_valid_transitions()
   ('my_second_state',)
+
+
+
+You can also use :code:`BaseFiniteStateMachineMixin` for more flexibility.
+Implementing :code:`current_state` and :code:`set_state` is required.
+Doing this allows using more complex behavior, but it is **not recommended**.

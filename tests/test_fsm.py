@@ -3,7 +3,7 @@ import unittest
 import fsm
 
 
-class FooBar(fsm.FiniteStateMachineMixin):
+class FooBar(fsm.BaseFiniteStateMachineMixin):
     state_machine = {}
 
 
@@ -25,10 +25,6 @@ class ProgramExecution(fsm.FiniteStateMachineMixin):
     def __init__(self, state):
         """Initialize setting a state."""
         self.state = state
-
-    def current_state(self):
-        """Overriden."""
-        return self.state
 
     def pre_pending(self):
         return
@@ -55,15 +51,19 @@ class TestStateMachine(unittest.TestCase):
         foo = FooBar()
         self.assertRaises(NotImplementedError, foo.current_state)
 
+    def test_set_state_fails_with_no_implementation(self):
+        foo = FooBar()
+        self.assertRaises(NotImplementedError, foo.set_state, 'init')
+
     def test_successful_specific_transition(self):
         """Test a succesful state transition."""
-        _ = self.program_execution.change_state('pending')
+        self.program_execution.change_state('pending')
         state = self.program_execution.change_state('running')
         assert state == 'running'
 
     def test_failed_specific_transition(self):
         """Test a failed state transition."""
-        _ = self.program_execution.change_state('pending')
+        self.program_execution.change_state('pending')
         try:
             state = self.program_execution.change_state('success')
         except fsm.InvalidTransition:
@@ -72,17 +72,17 @@ class TestStateMachine(unittest.TestCase):
 
     def test_succesful_transition_to_self(self):
         """Succesful transition from a state to the same state."""
-        _ = self.program_execution.change_state('pending')
-        _ = self.program_execution.change_state('running')
-        _ = self.program_execution.change_state('failed')
-        _ = self.program_execution.change_state('retry')
+        self.program_execution.change_state('pending')
+        self.program_execution.change_state('running')
+        self.program_execution.change_state('failed')
+        self.program_execution.change_state('retry')
         state = self.program_execution.change_state('retry')
         assert state == 'retry'
 
     def test_failed_transition_to_self(self):
         """Succesful transition from a state to the same state."""
-        _ = self.program_execution.change_state('pending')
-        _ = self.program_execution.change_state('running')
+        self.program_execution.change_state('pending')
+        self.program_execution.change_state('running')
         try:
             state = self.program_execution.change_state('running')
         except fsm.InvalidTransition:
@@ -91,9 +91,9 @@ class TestStateMachine(unittest.TestCase):
 
     def test_failed_nowhere_transition_to_created(self):
         """Test that a nowhere transition always fails (created)."""
-        _ = self.program_execution.change_state('pending')
-        _ = self.program_execution.change_state('running')
-        _ = self.program_execution.change_state('success')
+        self.program_execution.change_state('pending')
+        self.program_execution.change_state('running')
+        self.program_execution.change_state('success')
         try:
             state = self.program_execution.change_state('created')
         except fsm.InvalidTransition:
@@ -102,9 +102,9 @@ class TestStateMachine(unittest.TestCase):
 
     def test_failed_nowhere_transition_to_pending(self):
         """Test that a nowhere transition always fails (pending)."""
-        _ = self.program_execution.change_state('pending')
-        _ = self.program_execution.change_state('running')
-        _ = self.program_execution.change_state('success')
+        self.program_execution.change_state('pending')
+        self.program_execution.change_state('running')
+        self.program_execution.change_state('success')
         try:
             state = self.program_execution.change_state('pending')
         except fsm.InvalidTransition:
@@ -113,9 +113,9 @@ class TestStateMachine(unittest.TestCase):
 
     def test_failed_nowhere_transition_to_running(self):
         """Test that a nowhere transition always fails (running)."""
-        _ = self.program_execution.change_state('pending')
-        _ = self.program_execution.change_state('running')
-        _ = self.program_execution.change_state('success')
+        self.program_execution.change_state('pending')
+        self.program_execution.change_state('running')
+        self.program_execution.change_state('success')
         try:
             state = self.program_execution.change_state('running')
         except fsm.InvalidTransition:
@@ -124,9 +124,9 @@ class TestStateMachine(unittest.TestCase):
 
     def test_failed_nowhere_transition_to_success(self):
         """Test that a nowhere transition always fails (success)."""
-        _ = self.program_execution.change_state('pending')
-        _ = self.program_execution.change_state('running')
-        _ = self.program_execution.change_state('success')
+        self.program_execution.change_state('pending')
+        self.program_execution.change_state('running')
+        self.program_execution.change_state('success')
         try:
             state = self.program_execution.change_state('success')
         except fsm.InvalidTransition:
@@ -135,9 +135,9 @@ class TestStateMachine(unittest.TestCase):
 
     def test_failed_nowhere_transition_to_failed(self):
         """Test that a nowhere transition always fails (failed)."""
-        _ = self.program_execution.change_state('pending')
-        _ = self.program_execution.change_state('running')
-        _ = self.program_execution.change_state('success')
+        self.program_execution.change_state('pending')
+        self.program_execution.change_state('running')
+        self.program_execution.change_state('success')
         try:
             state = self.program_execution.change_state('failed')
         except fsm.InvalidTransition:
@@ -146,9 +146,9 @@ class TestStateMachine(unittest.TestCase):
 
     def test_failed_nowhere_transition_to_retry(self):
         """Test that a nowhere transition always fails (retry)."""
-        _ = self.program_execution.change_state('pending')
-        _ = self.program_execution.change_state('running')
-        _ = self.program_execution.change_state('success')
+        self.program_execution.change_state('pending')
+        self.program_execution.change_state('running')
+        self.program_execution.change_state('success')
         try:
             state = self.program_execution.change_state('retry')
         except fsm.InvalidTransition:

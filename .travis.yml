@@ -1,21 +1,26 @@
 language: python
-python: '3.5'
-sudo: false
+matrix:
+  include:
+    - python: 2.7
+      env: TOXENV=py27,docs
+    - python: 3.4
+      env: TOXENV=py34
+    - python: 3.5
+      env: TOXENV=py35
+    - python: 3.6
+      env: TOXENV=py36,codecov,docs
+    - python: pypy
+      env: TOXENV=pypy
 env:
   global:
     - LD_PRELOAD=/lib/x86_64-linux-gnu/libSegFault.so
     - SEGFAULT_SIGNALS=all
-  matrix:
-    - TOXENV=check
-    - TOXENV=docs
-    - TOXENV=py27,codecov
-    - TOXENV=py35,codecov
 before_install:
   - python --version
   - uname -a
   - lsb_release -a
 install:
-  - pip install tox
+  - pip install tox tox-travis
   - virtualenv --version
   - easy_install --version
   - pip --version

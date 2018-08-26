@@ -54,6 +54,9 @@ Minimal state machine
 
 * Free software: BSD license
 
+.. contents::
+    :depth: 2
+
 Usage
 =====
 
@@ -61,7 +64,7 @@ Usage
 
     import fsm
 
-    class MyModel(fsm.FiniteStateMachineMixin):
+    class MyTasks(fsm.FiniteStateMachineMixin):
         """An example to test the state machine.
 
         Contains transitions to everywhere, nowhere and specific states.
@@ -80,16 +83,12 @@ Usage
             """Initialize setting a state."""
             self.state = state
 
-        def current_state(self):
-            """Overriden."""
-            return self.state
-
         def on_before_pending(self):
             print("I'm going to a pending state")
 
 ::
 
-    In [4]: m = MyModel(state='created')
+    In [4]: m = MyTasks(state='created')
 
     In [5]: m.change_state('pending')
     I'm going to a pending state
@@ -134,6 +133,46 @@ Installation
 
     pip install fsmpy
 
+
+Django integration
+==================
+
+.. code-block:: python
+
+    import fsm
+    from django.db import models
+
+
+    class MyModel(models.Model, fsm.FiniteStateMachineMixin):
+        """An example to test the state machine.
+
+        Contains transitions to everywhere, nowhere and specific states.
+        """
+
+        CHOICES = (
+            ('created', 'CREATED'),
+            ('pending', 'PENDING'),
+            ('running', 'RUNNING'),
+            ('success', 'SUCCESS'),
+            ('failed', 'FAILED'),
+            ('retry', 'RETRY'),
+        )
+
+        state_machine = {
+            'created': '__all__',
+            'pending': ('running',),
+            'running': ('success', 'failed'),
+            'success': None,
+            'failed': ('retry',),
+            'retry': ('pending', 'retry'),
+        }
+
+        state = models.CharField(max_length=30, choices=CHOICES, default='created')
+
+        def on_change_state(self, previous_state, next_state, **kwargs):
+            self.save()
+
+
 Documentation
 =============
 
@@ -142,7 +181,7 @@ https://pyfsm.readthedocs.org/
 Development
 ===========
 
-To run the all tests run::
+To run the tests run::
 
     tox
 

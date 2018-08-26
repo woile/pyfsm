@@ -1,10 +1,10 @@
 from .exceptions import InvalidTransition
 
-__all__ = ['FiniteStateMachineMixin']
+__all__ = ["FiniteStateMachineMixin", "BaseFiniteStateMachineMixin"]
 
 
-class FiniteStateMachineMixin:
-    """Mixins which adds the behavior of a state_machine.
+class BaseFiniteStateMachineMixin:
+    """Base Mixin to add a state_machine behavior.
 
     Represents the state machine for the object.
 
@@ -17,13 +17,23 @@ class FiniteStateMachineMixin:
            'another_state': ('some_state', 'one_more_state')
            'one_more_state': None
         }
+
+    Requires the implementation of :code:`current_state` and :code:`set_state`
     """
 
     state_machine = None
 
     def current_state(self):
         """Returns the current state in the FSM."""
-        raise NotImplementedError('Subclass must implement this method!')
+        raise NotImplementedError("Subclass must implement this method!")
+
+    def set_state(self, state):
+        """Update the internal state field.
+
+        :param state: type depends on the definition of the states.
+        :type state: str or int
+        """
+        raise NotImplementedError("Subclass must implement this method!")
 
     def can_change(self, next_state):
         """Validates if the next_state can be executed or not.
@@ -46,7 +56,7 @@ class FiniteStateMachineMixin:
         current = self.current_state()
         valid_transitions = self.state_machine[current]
 
-        if valid_transitions == '__all__':
+        if valid_transitions == "__all__":
             return self.state_machine.keys()
 
         return self.state_machine[current]
@@ -72,7 +82,8 @@ class FiniteStateMachineMixin:
         pass
 
     def change_state(self, next_state, **kwargs):
-        """Performs a transition from current state to the given next state if possible.
+        """Performs a transition from current state to the given next state if
+        possible.
 
         Callbacks will be exacuted before an after changing the state.
         Specific state callbacks will also be called if they are implemented
@@ -87,23 +98,44 @@ class FiniteStateMachineMixin:
         previous_state = self.current_state()
 
         if not self.can_change(next_state):
-            msg = "The transition from {0} to {1} is not valid".format(previous_state,
-                                                                       next_state)
+            msg = "The transition from {0} to {1} is not valid".format(
+                previous_state, next_state
+            )
             raise InvalidTransition(msg)
 
-        name = 'pre_{0}'.format(next_state)
+        name = "pre_{0}".format(next_state)
         callback = getattr(self, name, None)
         if callback:
             callback(**kwargs)
 
         self.on_before_change_state(previous_state, next_state, **kwargs)
 
-        self.state = next_state
+        self.set_state(next_state)
 
-        name = 'post_{0}'.format(next_state)
+        name = "post_{0}".format(next_state)
         callback = getattr(self, name, None)
         if callback:
             callback(**kwargs)
 
         self.on_change_state(previous_state, next_state, **kwargs)
         return next_state
+
+
+class FiniteStateMachineMixin(BaseFiniteStateMachineMixin):
+    """A drop in implementation. Ready to be used.
+
+    Replace :code:`FIELD_NAME` in order to automatically retrieve or set
+    from a different field.
+
+    In order to use with django, just add a field :code:`state`
+    or as defined in :code:`FIELD_NAME`
+    and remember to use :code:`change_state` instead of simply assigning it
+    """
+
+    FIELD_NAME = "state"
+
+    def current_state(self):
+        return getattr(self, self.FIELD_NAME)
+
+    def set_state(self, state):
+        setattr(self, self.FIELD_NAME, state)
