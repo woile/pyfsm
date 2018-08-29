@@ -15,31 +15,32 @@ Overview
     * - package
       - |version| |wheel| |supported-versions| |supported-implementations|
 
-.. |docs| image:: https://readthedocs.org/projects/pyfsm/badge/?style=flat
-    :target: https://readthedocs.org/projects/pyfsm
-    :alt: Documentation Status
 
-.. |travis| image:: https://travis-ci.org/Woile/pyfsm.svg?branch=master
+.. |docs| image:: https://img.shields.io/readthedocs/pip.svg?style=flat-square
+    :alt: Read the Docs
+    :target: https://readthedocs.org/projects/pyfsm
+
+.. |travis| image:: https://img.shields.io/travis/Woile/pyfsm.svg?style=flat-square
     :alt: Travis-CI Build Status
     :target: https://travis-ci.org/Woile/pyfsm
 
-.. |codecov| image:: https://codecov.io/github/Woile/pyfsm/coverage.svg?branch=master
+.. |codecov| image:: https://img.shields.io/codecov/c/github/Woile/pyfsm.svg?style=flat-square
     :alt: Coverage Status
     :target: https://codecov.io/github/Woile/pyfsm
 
-.. |version| image:: https://img.shields.io/pypi/v/fsmpy.svg?style=flat
+.. |version| image:: https://img.shields.io/pypi/v/fsmpy.svg?style=flat-square
     :alt: PyPI Package latest release
     :target: https://pypi.python.org/pypi/fsmpy
 
-.. |wheel| image:: https://img.shields.io/pypi/wheel/fsmpy.svg?style=flat
+.. |wheel| image:: https://img.shields.io/pypi/wheel/fsmpy.svg?style=flat-square
     :alt: PyPI Wheel
     :target: https://pypi.python.org/pypi/fsmpy
 
-.. |supported-versions| image:: https://img.shields.io/pypi/pyversions/fsmpy.svg?style=flat
+.. |supported-versions| image:: https://img.shields.io/pypi/pyversions/fsmpy.svg?style=flat-square
     :alt: Supported versions
     :target: https://pypi.python.org/pypi/fsmpy
 
-.. |supported-implementations| image:: https://img.shields.io/pypi/implementation/fsmpy.svg?style=flat
+.. |supported-implementations| image:: https://img.shields.io/pypi/implementation/fsmpy.svg?style=flat-square
     :alt: Supported implementations
     :target: https://pypi.python.org/pypi/fsmpy
 
