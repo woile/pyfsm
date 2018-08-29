@@ -2,6 +2,33 @@
 Usage
 =====
 
+1. Define in a class the :code:`state_machine`
+2. Initialize :code:`state`, either with a value, using :code:`__init__` or as a django field
+3. Add hooks:
+
++------------------------+-------------------------------------------------------------------------------------------------------------+
+| Method                 | Description                                                                                                 |
++------------------------+-------------------------------------------------------------------------------------------------------------+
+| on_before_change_state | Before transitioning to the state                                                                           |
++------------------------+-------------------------------------------------------------------------------------------------------------+
+| on_change_state        | After transitioning to the state, if no failure, runs for every state                                       |
++------------------------+-------------------------------------------------------------------------------------------------------------+
+| pre_<state_name>       | Runs before a particular state, where :code:`state_name` is the specified name in the :code:`state_machine` |
++------------------------+-------------------------------------------------------------------------------------------------------------+
+| post_<state_name>      | Runs after a particular state, where :code:`state_name` is the specified name in the :code:`state_machine`  |
++------------------------+-------------------------------------------------------------------------------------------------------------+
+
+This hooks will receive any extra argument given to :code:`change_state`
+
+
+E.g:
+
+Running :code:`m.change_state('pending', name='john')` will trigger :code:`pre_pending(name='john')`
+
+In your code
+------------
+
+
 To use Python Finite State Machine in a project::
 
     import fsm

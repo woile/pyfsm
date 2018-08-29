@@ -8,6 +8,7 @@ Contents
    readme
    installation
    usage
+   django
    reference/index
    contributing
    authors

@@ -50,11 +50,6 @@ Minimal state machine
 
 * Free software: BSD license
 
-.. contents::
-    :depth: 2
-
-Usage
-=====
 
 .. code-block:: python
 
@@ -90,7 +85,10 @@ Usage
     I'm going to a pending state
     Out[5]: 'pending'
 
-    In [6]: m.change_state('failed')
+
+::
+
+    In [6]: m.change_state('failed')  # Let's try to transition to an invalid state
     ---------------------------------------------------------------------------
     InvalidTransition                         Traceback (most recent call last)
     <ipython-input-6-71d2461eee74> in <module>()
@@ -105,21 +103,8 @@ Usage
 
     InvalidTransition: The transition from pending to failed is not valid
 
-
-There are hooks that can be included before a state transition happens and after.
-
-fsm will look for these functions
-
-::
-
-    pre_<state_name>
-    post_<state_name>
-
-And will give them any extra argument given to :code:`change_state`
-
-E.g:
-
-Running :code:`m.change_state('pending', name='john')` will trigger :code:`pre_pending(name='john')`
+.. contents::
+    :depth: 2
 
 
 Installation
@@ -129,6 +114,32 @@ Installation
 
     pip install fsmpy
 
+
+Usage
+======
+
+1. Define in a class the :code:`state_machine`
+2. Initialize :code:`state`, either with a value, using :code:`__init__` or as a django field
+3. Add hooks:
+
++------------------------+-------------------------------------------------------------------------------------------------------------+
+| Method                 | Description                                                                                                 |
++------------------------+-------------------------------------------------------------------------------------------------------------+
+| on_before_change_state | Before transitioning to the state                                                                           |
++------------------------+-------------------------------------------------------------------------------------------------------------+
+| on_change_state        | After transitioning to the state, if no failure, runs for every state                                       |
++------------------------+-------------------------------------------------------------------------------------------------------------+
+| pre_<state_name>       | Runs before a particular state, where :code:`state_name` is the specified name in the :code:`state_machine` |
++------------------------+-------------------------------------------------------------------------------------------------------------+
+| post_<state_name>      | Runs after a particular state, where :code:`state_name` is the specified name in the :code:`state_machine`  |
++------------------------+-------------------------------------------------------------------------------------------------------------+
+
+This hooks will receive any extra argument given to :code:`change_state`
+
+
+E.g:
+
+Running :code:`m.change_state('pending', name='john')` will trigger :code:`pre_pending(name='john')`
 
 Django integration
 ==================
