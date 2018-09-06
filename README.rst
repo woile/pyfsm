@@ -192,12 +192,12 @@ One simple solution is to do this:
     class MySerializer(serializers.ModelSerializer):
 
         def update(self, instance, validated_data):
-            instance = super().update(instance, validated_data)
             new_state = validated_data.get('state', instance.state)
             try:
                 instance.change_state(new_state)
             except fsm.InvalidTransition:
                 raise serializers.ValidationError("Invalid transition")
+            instance = super().update(instance, validated_data)
             return instance
 
 
