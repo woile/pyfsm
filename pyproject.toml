@@ -22,5 +22,5 @@ python = "*"
 
 [tool.poetry.dev-dependencies]
 tox = "^3.2"
-bumpversion = "^0.5.3"
+bumpversion = "^0.6.0"
 flake8 = "^3.5"
