@@ -26,7 +26,7 @@ project = 'Python Finite State Machine'
 year = '2016'
 author = 'Santiago Fraire Willemoes'
 copyright = '{0}, {1}'.format(year, author)
-version = release = '2.0.0'
+version = release = '2.1.0'
 
 pygments_style = 'trac'
 templates_path = ['.']
