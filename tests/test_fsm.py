@@ -154,3 +154,13 @@ class TestStateMachine(unittest.TestCase):
         except fsm.InvalidTransition:
             state = None
         assert state is None
+
+    def test_abort_transition(self):
+        """Test aborting transition from pre_ method."""
+
+        def abort():
+            raise fsm.exceptions.AbortTransition
+
+        self.program_execution.pre_pending = abort
+        state = self.program_execution.change_state('pending')
+        assert state == 'created'

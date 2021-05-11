@@ -25,6 +25,8 @@ E.g:
 
 Running :code:`m.change_state('pending', name='john')` will trigger :code:`pre_pending(name='john')`
 
+Raising AbortTransition in `pre_<state_name>` method will result in no state change and `on_before_change_state` not called.
+
 In your code
 ------------
 

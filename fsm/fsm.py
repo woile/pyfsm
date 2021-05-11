@@ -1,4 +1,4 @@
-from .exceptions import InvalidTransition
+from .exceptions import AbortTransition, InvalidTransition
 
 __all__ = ["FiniteStateMachineMixin", "BaseFiniteStateMachineMixin"]
 
@@ -106,7 +106,10 @@ class BaseFiniteStateMachineMixin:
         name = "pre_{0}".format(next_state)
         callback = getattr(self, name, None)
         if callback:
-            callback(**kwargs)
+            try:
+                callback(**kwargs)
+            except AbortTransition:
+                return previous_state
 
         self.on_before_change_state(previous_state, next_state, **kwargs)
 
